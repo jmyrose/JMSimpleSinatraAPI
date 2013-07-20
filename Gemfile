@@ -3,5 +3,11 @@ source 'https://rubygems.org'
 gem 'sinatra'
 gem 'data_mapper'
 gem 'json'
-gem 'dm-sqlite-adapter'
-gem 'dm-postgres-adapter'
+
+group :development do
+      gem 'dm-sqlite-adapter'
+end
+
+group :development do
+      gem 'dm-postgres-adapter'
+end
