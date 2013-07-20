@@ -9,5 +9,6 @@ group :development do
 end
 
 group :development do
-      gem 'dm-postgres-adapter'
+      #gem 'dm-postgres-adapter'
+      gem 'pg'
 end
