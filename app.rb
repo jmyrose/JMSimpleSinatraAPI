@@ -1,11 +1,9 @@
 #app.rb
-require 'rubygems'
-require 'sinatra'
-require 'data_mapper'
-require 'json'
+require 'bundler'
+Bundler.require
 
-# Setup DataMapper with local sqlite
-DataMapper.setup(:default, "sqlite://#{Dir.pwd}/development.sqlite")
+# Setup DataMapper with Heroku or locally with SQLite
+DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite://#{Dir.pwd}/development.sqlite")
 
 # Define basic User model
 class User
@@ -31,9 +29,9 @@ get '/users' do
 end
 
 # add a new user
-# params:
-# firstName
-# lastName
+# 
+# @param firstName the user's first name
+# @param lastName the user's last name
 post '/users' do
 	content_type :json
 	
@@ -73,11 +71,9 @@ put '/users/:id' do
 	@user = User.get(params[:id])
 	@user.update(params_json)
 	
-	# If the user is successfully stored, return the user json back
 	if @user.save
 		@user.to_json
 	else
-	# Otherwise, throw an error!
 		halt 500
 	end
 end
