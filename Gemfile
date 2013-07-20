@@ -8,7 +8,6 @@ group :development do
       gem 'dm-sqlite-adapter'
 end
 
-group :development do
-      #gem 'dm-postgres-adapter'
-      gem 'pg'
+group :production do
+      gem 'dm-postgres-adapter'
 end
